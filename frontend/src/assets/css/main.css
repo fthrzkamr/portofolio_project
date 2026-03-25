@@ -1,0 +1,100 @@
+/* 
+  Balanced Professional Design System 
+  Theme: Muted Slate Gray (Dimmed Light Mode, No Black, No White)
+*/
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Dimmed Background - Balanced Muted Palette (Anti Black & Anti Pure White) */
+  --bg-main: #ebf0f5; /* Soft Muted Slate Gray - Dimmed from White */
+  --bg-card: rgba(255, 255, 255, 0.6);
+  
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  
+  /* Vibrant & Professional Accents (No Purple) */
+  --accent-1: #2563eb; /* Professional Vibrant Blue */
+  --accent-2: #059669; /* Balanced Emerald */
+  
+  --gradient-main: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  
+  /* Glass Effects - Sophisticated & Soft */
+  --border-glass: rgba(255, 255, 255, 0.9);
+  --shadow-main: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --backdrop-blur: blur(25px);
+
+  /* Typography - Scaled Down for Professionalism */
+  --font-main: 'Outfit', sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-main);
+  /* Very subtle depth gradients (almost invisible but elegant) */
+  background-image: 
+    radial-gradient(circle at 5% 5%, rgba(37, 99, 235, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 95% 95%, rgba(5, 150, 105, 0.03) 0%, transparent 40%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Utilities - Sizes Optimized for 100% Width */
+.text-gradient {
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+.title-massive {
+  font-size: clamp(2rem, 3.5vw, 3.2rem); /* Significantly Reduced from 5rem */
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+/* Premium Button - Solid & Modern */
+.btn-primary {
+  background: var(--text-main);
+  color: white;
+  padding: 14px 34px;
+  border-radius: 12px;
+  border: none;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(30, 41, 59, 0.1);
+}
+
+.btn-primary:hover {
+  background: var(--accent-1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+}
+
+/* Glass Card */
+.glass-box {
+  background: var(--bg-card);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--border-glass);
+  border-radius: 30px;
+  box-shadow: var(--shadow-main);
+}
+
+h1, h2, h3, h4 { font-family: var(--font-main); }
+a { text-decoration: none; color: inherit; }
