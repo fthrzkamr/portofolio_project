@@ -28,6 +28,11 @@
   --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px; /* Adjust based on Navbar height + space */
+}
+
 * {
   margin: 0;
   padding: 0;

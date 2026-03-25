@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink } from "vue-router";
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 </script>
 
 <template>
@@ -12,10 +15,14 @@ import { RouterLink } from "vue-router";
       </div>
 
       <nav class="nav-links">
-        <RouterLink to="/" class="nav-link">Home</RouterLink>
-        <RouterLink to="#about" class="nav-link">About</RouterLink>
-        <RouterLink to="#projects" class="nav-link">Projects</RouterLink>
-        <RouterLink to="/login" class="nav-btn">Login</RouterLink>
+        <!-- Navigation Links (Hidden on Home Page) -->
+        <template v-if="route.path !== '/'">
+          <a href="#profile" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </template>
+        <RouterLink to="/login" class="nav-btn-dark">Login</RouterLink>
       </nav>
     </div>
   </header>
@@ -55,50 +62,101 @@ import { RouterLink } from "vue-router";
 
 .nav-link {
   font-weight: 600;
-  font-size: 0.95rem; /* Down from 1rem */
+  font-size: 0.95rem;
   color: var(--text-muted);
-  transition: var(--transition-smooth);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 8px 4px;
   position: relative;
+  display: inline-block;
 }
 
-.nav-link:hover,
 .router-link-active {
   color: var(--text-main);
 }
 
-.nav-link::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 3px;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--gradient-main);
-  transition: var(--transition-smooth);
-  border-radius: 3px;
+.nav-link:hover {
+  color: var(--text-main);
+  transform: translateY(-6px) scale(1.1); /* Visible ONLY on hover */
+  z-index: 10;
 }
 
-.nav-link:hover::after,
-.router-link-active::after {
+/* Elegant Center Underline */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-main);
+  transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-link:hover::after, .router-link-active::after {
   width: 100%;
 }
 
-.nav-btn {
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--text-main);
-  border: 1px solid var(--border-glass);
-  background: white;
-  padding: 8px 20px;
-  border-radius: 50px;
-  transition: var(--transition-smooth);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+.nav-link:active {
+  transform: scale(0.9);
 }
 
-.nav-btn:hover {
-  background: var(--text-main);
-  border-color: var(--text-main);
+.nav-btn-dark {
+  font-weight: 700;
+  font-size: 0.9rem;
   color: white;
+  background: var(--text-main);
+  padding: 8px 24px;
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn-dark:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(30, 41, 59, 0.15);
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navbar {
+    top: 10px;
+    width: 95%;
+    padding: 10px 20px;
+    border-radius: 40px;
+  }
+
+  .nav-container {
+    flex-direction: column; /* Stack logo and links for more space */
+    gap: 12px;
+  }
+
+  .logo a {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+  }
+
+  .nav-btn {
+    display: none; /* Hide old button in mobile nav for cleaner look */
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 15px;
+  }
+  
+  .nav-link {
+    font-size: 0.8rem;
+  }
 }
 </style>

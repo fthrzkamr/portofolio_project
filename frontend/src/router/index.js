@@ -9,13 +9,26 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
-    // {
-    //   path: '/projects',
-    //   name: 'projects',
-    //   // Route level code-splitting for slower pages
-    //   // component: () => import('../views/ProjectsView.vue')
-    // }
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: () => import("../views/DashboardView.vue"),
+    },
+    {
+      path: "/contact",
+      name: "contact",
+      redirect: "/dashboard#contact", // Link to dashboard's contact section
+    },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    if (to.hash) {
+      return { el: to.hash, behavior: "smooth" };
+    }
+    return { top: 0, behavior: "smooth" };
+  },
 });
 
 export default router;
